@@ -10,13 +10,22 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./SourceFile/DSP280x_Adc.obj" \
 "./SourceFile/DSP280x_CodeStartBranch.obj" \
 "./SourceFile/DSP280x_CpuTimers.obj" \
 "./SourceFile/DSP280x_DefaultIsr.obj" \
+"./SourceFile/DSP280x_ECan.obj" \
+"./SourceFile/DSP280x_ECap.obj" \
+"./SourceFile/DSP280x_EPwm.obj" \
+"./SourceFile/DSP280x_EQep.obj" \
 "./SourceFile/DSP280x_GlobalVariableDefs.obj" \
 "./SourceFile/DSP280x_Gpio.obj" \
+"./SourceFile/DSP280x_I2C.obj" \
+"./SourceFile/DSP280x_MemCopy.obj" \
 "./SourceFile/DSP280x_PieCtrl.obj" \
 "./SourceFile/DSP280x_PieVect.obj" \
+"./SourceFile/DSP280x_Sci.obj" \
+"./SourceFile/DSP280x_Spi.obj" \
 "./SourceFile/DSP280x_SysCtrl.obj" \
 "./SourceFile/DSP280x_usDelay.obj" \
 "./SourceFile/main.obj" \
@@ -162,8 +171,8 @@ TMS320C2802.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "SourceFile\DSP280x_CpuTimers.d" "SourceFile\DSP280x_DefaultIsr.d" "SourceFile\DSP280x_GlobalVariableDefs.d" "SourceFile\DSP280x_Gpio.d" "SourceFile\DSP280x_PieCtrl.d" "SourceFile\DSP280x_PieVect.d" "SourceFile\DSP280x_SysCtrl.d" "SourceFile\main.d" 
-	-$(RM) "SourceFile\DSP280x_CodeStartBranch.obj" "SourceFile\DSP280x_CpuTimers.obj" "SourceFile\DSP280x_DefaultIsr.obj" "SourceFile\DSP280x_GlobalVariableDefs.obj" "SourceFile\DSP280x_Gpio.obj" "SourceFile\DSP280x_PieCtrl.obj" "SourceFile\DSP280x_PieVect.obj" "SourceFile\DSP280x_SysCtrl.obj" "SourceFile\DSP280x_usDelay.obj" "SourceFile\main.obj" 
+	-$(RM) "SourceFile\DSP280x_Adc.d" "SourceFile\DSP280x_CpuTimers.d" "SourceFile\DSP280x_DefaultIsr.d" "SourceFile\DSP280x_ECan.d" "SourceFile\DSP280x_ECap.d" "SourceFile\DSP280x_EPwm.d" "SourceFile\DSP280x_EQep.d" "SourceFile\DSP280x_GlobalVariableDefs.d" "SourceFile\DSP280x_Gpio.d" "SourceFile\DSP280x_I2C.d" "SourceFile\DSP280x_MemCopy.d" "SourceFile\DSP280x_PieCtrl.d" "SourceFile\DSP280x_PieVect.d" "SourceFile\DSP280x_Sci.d" "SourceFile\DSP280x_Spi.d" "SourceFile\DSP280x_SysCtrl.d" "SourceFile\main.d" 
+	-$(RM) "SourceFile\DSP280x_Adc.obj" "SourceFile\DSP280x_CodeStartBranch.obj" "SourceFile\DSP280x_CpuTimers.obj" "SourceFile\DSP280x_DefaultIsr.obj" "SourceFile\DSP280x_ECan.obj" "SourceFile\DSP280x_ECap.obj" "SourceFile\DSP280x_EPwm.obj" "SourceFile\DSP280x_EQep.obj" "SourceFile\DSP280x_GlobalVariableDefs.obj" "SourceFile\DSP280x_Gpio.obj" "SourceFile\DSP280x_I2C.obj" "SourceFile\DSP280x_MemCopy.obj" "SourceFile\DSP280x_PieCtrl.obj" "SourceFile\DSP280x_PieVect.obj" "SourceFile\DSP280x_Sci.obj" "SourceFile\DSP280x_Spi.obj" "SourceFile\DSP280x_SysCtrl.obj" "SourceFile\DSP280x_usDelay.obj" "SourceFile\main.obj" 
 	-$(RM) "SourceFile\DSP280x_CodeStartBranch.d" "SourceFile\DSP280x_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

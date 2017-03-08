@@ -31,13 +31,13 @@ void main(void)
 
 	EINT;   // Enable Global interrupt INTM 开放全局中断
     ERTM;   // Enable Global realtime interrupt DBGM开放全局实时中断DBGM
-//---------------------------------------------------------------------
-//	CpuTimer0Regs.TCR.bit.TSS = 0;//启动CPU定时器
-
-//	while(1){
-//	GpioDataRegs.GPATOGGLE.bit.GPIO15 = 1;
-//	delay(200);
-//	}
+    while(1)
+    {
+    	GpioDataRegs.GPATOGGLE.bit.GPIO15 = 1;
+    	delay(100);
+    	GpioDataRegs.GPATOGGLE.bit.GPIO15 = 0;
+    	delay(100);
+    }
 }
 void delay(int num)
 {
@@ -45,15 +45,13 @@ void delay(int num)
     {
         long i = 1000;
         while(i--);
-
-
     }
 
 }
  interrupt void TINT0_ISR(void)//CPU定时器0中断服务子程序
 {
-	GpioDataRegs.GPATOGGLE.bit.GPIO24 = 1; //LED1
-	GpioDataRegs.GPATOGGLE.bit.GPIO15 = 1; //LED2
+	//GpioDataRegs.GPATOGGLE.bit.GPIO24 = 1; //LED1
+	//GpioDataRegs.GPATOGGLE.bit.GPIO15 = 1; //LED2
 	GpioDataRegs.GPATOGGLE.bit.GPIO12 = 1; //LED3
 	count++;
 	PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
