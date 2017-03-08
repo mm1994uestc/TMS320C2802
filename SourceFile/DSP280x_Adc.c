@@ -35,8 +35,15 @@ void InitAdc(void)
     // Please note that for the delay function below to operate correctly the 
 	// CPU_CLOCK_SPEED define statement in the DSP280x_Examples.h file must 
 	// contain the correct CPU clock period in nanoseconds. 
-
-    AdcRegs.ADCTRL3.all = 0x00E0;  // Power up bandgap/reference/ADC circuits
+#if 0
+    AdcRegs.ADCTRL1.bit.RESET = 1; //Reset the ADC Module
+    AdcRegs.ADCTRL1.bit.SUSMOD = 0; //Mode 0. Emulation suspend is ignored
+    AdcRegs.ADCTRL1.bit.ACQ_PS = 5; //The default value is 5
+    AdcRegs.ADCTRL1.bit.CPS = 0; //ADCCLK = Fclk/1  Note: Fclk = Prescaled HSPCLK (ADCCLKPS[3:0])
+    AdcRegs.ADCTRL1.bit.CONT_RUN = 1; //Using the continue mode to r
+    AdcRegs.ADCTRL1.bit.SEQ_CASC = 0; //Dual-sequencer mode. SEQ1 and SEQ2 operate as two 8-state sequencers
+#endif
+    AdcRegs.ADCTRL3.all = 0x00E0; // Power up bandgap/reference/ADC circuits 可以使用all成员变量来初始化起始地址之后的所有变量
     DELAY_US(ADC_usDELAY);         // Delay before converting ADC channels
 }	
 

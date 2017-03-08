@@ -92,9 +92,10 @@ void ServiceDog(void)
 
 void DisableDog(void)
 {
-    EALLOW;
+    EALLOW; //设置寄存器1的C6位，从而允许设置受EALLOW保护的模块的寄存器：GPIO寄存器，MUX寄存器等等(下面的SysCtrlRegs的所有寄存器都受EALLOW保护，设置前要关掉保护)
     SysCtrlRegs.WDCR= 0x0068;
-    EDIS;
+    //SysCtrlRegs系统控制寄存器，由结构体SYS_CTRL_REGS定义，WDCR为Uint16型成员变量，手册上的地址是0x7029，装载的值是0x0068=0000 0000 0110 1000，设置Bit6=1 Disable Watchdog
+    EDIS; //关闭DSP部分重要寄存器的设置权限，将寄存器的值禁止写入，保护起来
 }
 
 //---------------------------------------------------------------------------

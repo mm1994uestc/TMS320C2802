@@ -214,9 +214,9 @@ union GPIOXINT_REG {
 };
 
 
-struct GPIO_CTRL_REGS {
+struct GPIO_CTRL_REGS { //有A和B两组GPIO控制寄存器
    union  GPACTRL_REG  GPACTRL;   // GPIO A Control Register (GPIO0 to 31)
-   union  GPA1_REG     GPAQSEL1;  // GPIO A Qualifier Select 1 Register (GPIO0 to 15)
+   union  GPA1_REG     GPAQSEL1;  // GPIO A Qualifier Select 1 Register (GPIO0 to 15) Qualifier的意思是：使能
    union  GPA2_REG     GPAQSEL2;  // GPIO A Qualifier Select 2 Register (GPIO16 to 31)
    union  GPA1_REG     GPAMUX1;   // GPIO A Mux 1 Register (GPIO0 to 15)
    union  GPA2_REG     GPAMUX2;   // GPIO A Mux 2 Register (GPIO16 to 31)
@@ -237,7 +237,7 @@ struct GPIO_DATA_REGS {
    union  GPADAT_REG       GPADAT;       // GPIO Data Register (GPIO0 to 31)
    union  GPADAT_REG       GPASET;       // GPIO Data Set Register (GPIO0 to 31)
    union  GPADAT_REG       GPACLEAR;     // GPIO Data Clear Register (GPIO0 to 31)
-   union  GPADAT_REG       GPATOGGLE;    // GPIO Data Toggle Register (GPIO0 to 31) 
+   union  GPADAT_REG       GPATOGGLE;    // GPIO Data Toggle Register (GPIO0 to 31) Toggle的意思是切换的意思，相当于执行一次切换一次状态，相当于翻转寄存器
    union  GPBPUD_REG       GPBDAT;       // GPIO Data Register (GPIO32 to 63)
    union  GPBDAT_REG       GPBSET;       // GPIO Data Set Register (GPIO32 to 63)
    union  GPBDAT_REG       GPBCLEAR;     // GPIO Data Clear Register (GPIO32 to 63)

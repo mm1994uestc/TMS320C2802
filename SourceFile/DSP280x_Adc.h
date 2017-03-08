@@ -23,7 +23,7 @@ extern "C" {
 // ADC Individual Register Bit Definitions:
 
 struct ADCTRL1_BITS {     // bits  description
-    Uint16  rsvd1:4;      // 3:0   reserved
+    Uint16  rsvd1:4;      // 3:0   reserved The words reserved means that this bit is not used(NC)
     Uint16  SEQ_CASC:1;   // 4     Cascaded sequencer mode
     Uint16  SEQ_OVRD:1;   // 5     Sequencer override 
     Uint16  CONT_RUN:1;   // 6     Continuous run

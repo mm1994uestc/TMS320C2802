@@ -27,7 +27,7 @@ extern "C" {
 #define   DSP28_28015  0
 #define   DSP28_28016  0
 #define   DSP28_2809   0
-#define   DSP28_2808   1 
+#define   DSP28_2808   1 //正如上面所说，这里用来选择你所选择的器件的型号，DSP28_2802置为1表示启用的是2802设备，下面的#if DSP28_2802下面的寄存器设置语句就会生效
 #define   DSP28_2806   0
 #define   DSP28_2802   0
 #define   DSP28_2801   0
@@ -39,12 +39,15 @@ extern "C" {
 extern cregister volatile unsigned int IFR;
 extern cregister volatile unsigned int IER;
 
-#define  EINT   asm(" clrc INTM")
-#define  DINT   asm(" setc INTM")
-#define  ERTM   asm(" clrc DBGM")
-#define  DRTM   asm(" setc DBGM")
+#define  EINT   asm(" clrc INTM") //INTM置0，打开中断
+#define  DINT   asm(" setc INTM") //INTM置1，关闭中断
+#define  ERTM   asm(" clrc DBGM") //使能调试事件
+#define  DRTM   asm(" setc DBGM") //禁止调试事件
 #define  EALLOW asm(" EALLOW")
+//DSP上电复位之后，状态寄存器基本上都是清零的，这样就设置了状态寄存器为禁止改写的状态。为了实现改写状态寄存器的内容，我们需要执行汇编指令asm(" EALLOW")来设置状态寄存器1的C6位
+//这些关键的寄存器包括器件仿真寄存器，FLASH寄存器，GPIO寄存器，MUX寄存器，CSM寄存器，PIE寄存器，eCAN寄存器等等
 #define  EDIS   asm(" EDIS")
+//DSP在设置完寄存器之后，一定要注意执行汇编指令asm(" EDIS")或者 宏定义EDIS来清除状态寄存器1的C6位
 #define  ESTOP0 asm(" ESTOP0")
 
 #define M_INT1  0x0001
@@ -119,7 +122,7 @@ typedef long double     float64;
 #include "DSP280x_SysCtrl.h"            // System Control/Power Modes
 #include "DSP280x_XIntrupt.h"           // External Interrupts
 
-#if DSP28_2809 || DSP28_2808
+#if DSP28_2809 || DSP28_2808 //当前的选择是DSP28_2802 = 1，下面的宏定义语句生效，用来确定设备的模块是否存在和启用
 #define DSP28_EPWM1 1
 #define DSP28_EPWM2 1
 #define DSP28_EPWM3 1
