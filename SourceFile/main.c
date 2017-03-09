@@ -6,10 +6,11 @@
 void delay(int num);
 interrupt void TINT0_ISR(void);
 
+int count=0;
+float ADC_Voltage=0.0;
+
 void main(void)
 {
-   int count=0;
-   float ADC_Voltage=0.0;
    InitSysCtrl(); //通过设置WCDR寄存器的Bit6=1，关闭了WCDR Watchdog看门狗
    InitGpio(); //初始化了GPIOA和GPIOB的控制寄存器，设置了GPIOA.Bit0等引脚为ePWM模式或者普通GPIO模式，设置了GPIO的输入输出模式
    DINT; //asm(" setc INTM")置位INTM为1，Disable Interrupter
@@ -27,7 +28,6 @@ void main(void)
 
 	InitAdc(); // Initial The Adc with the function InitAdc(),The GPIO Set to be the ADC_Channel is M_CL=ADC-A5
 	delay(50);
-	// 电路原理图
 
 	StartCpuTimer0();//开始CPU中断
 
@@ -41,17 +41,17 @@ void main(void)
     {
     	AdcRegs.ADCTRL2.bit.RST_SEQ1 = 1; //Immediately reset sequencer to state CONV00
     	AdcRegs.ADCTRL2.bit.SOC_SEQ1 = 1; //S/W - Software writing a 1 to this bit
-    	ADC_Voltage = ADCLO+(AdcMirror.ADCRESULT0)*3.0/4096; //The formulation to calculate the input ADC_Voltage,Use the mirror result we do not need to right shift the ADC_value
+    	delay(10);
+    	ADC_Voltage += ADCLO+(AdcMirror.ADCRESULT0)*3.0/4096; //The formulation to calculate the input ADC_Voltage,Use the mirror result we do not need to right shift the ADC_value
     	AdcRegs.ADCTRL2.bit.RST_SEQ1 = 1; //Immediately reset sequencer to state CONV00
     	AdcRegs.ADCTRL2.bit.SOC_SEQ1 = 0; //Clears a pending SOC trigger
-    	delay(100);
     	if(0 == count%10)
     	{
     		count = 0;
     		ADC_Voltage = ADC_Voltage/10.0;
-    		if(ADC_Voltage >= 1.5){
+    		if(ADC_Voltage >= 0.8){
     			GpioDataRegs.GPASET.bit.GPIO15 = 1;
-    			//GpioDataRegs.GPACLEAR.bit.GPIO24 = 1; //Remember to init the GPIO Port as Output
+    			//GpioDataRegs.GPACLEAR.bit.GPIO24 = 1;
     		}
     		else{
     			GpioDataRegs.GPACLEAR.bit.GPIO15 = 1;
