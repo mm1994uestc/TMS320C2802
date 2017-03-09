@@ -41,12 +41,12 @@ void InitGpio(void)
    GpioDataRegs.GPACLEAR.bit.GPIO11 = 1;
 #endif
 
-   GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;
+   GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0; //Timer cycle control LED
    GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 0;
    GpioCtrlRegs.GPADIR.bit.GPIO12 = 1;
    GpioDataRegs.GPACLEAR.bit.GPIO12 = 1;
 
-   GpioCtrlRegs.GPAPUD.bit.GPIO15 = 0;
+   GpioCtrlRegs.GPAPUD.bit.GPIO15 = 0; //While cycle control LED
    GpioCtrlRegs.GPAMUX1.bit.GPIO15 = 0;
    GpioCtrlRegs.GPADIR.bit.GPIO15 = 1;
    GpioDataRegs.GPACLEAR.bit.GPIO15 = 1;
@@ -56,7 +56,7 @@ void InitGpio(void)
    GpioCtrlRegs.GPADIR.bit.GPIO22 = 1;   // Configures the GPIO22 pin as an output
    GpioDataRegs.GPACLEAR.bit.GPIO22 = 1;   // Set the output value of GPIO22 = 0(Clear the GPIO)
 
-   GpioCtrlRegs.GPAPUD.bit.GPIO24 = 0;
+   GpioCtrlRegs.GPAPUD.bit.GPIO24 = 0; //Output Port(ADC_Voltage Present LED)
    GpioCtrlRegs.GPAMUX2.bit.GPIO24 = 0;
    GpioCtrlRegs.GPADIR.bit.GPIO24 = 1;
    GpioDataRegs.GPACLEAR.bit.GPIO24 = 1;

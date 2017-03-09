@@ -8,8 +8,8 @@
 // TITLE:	Linker Command File For F2802 Device
 //
 //###########################################################################
-// $TI Release: DSP280x, DSP2801x Header Files V1.41 $
-// $Release Date: August 7th, 2006 $
+// $TI Release: DSP280x C/C++ Header Files V1.70 $
+// $Release Date: July 27, 2009 $
 //###########################################################################
 */
 

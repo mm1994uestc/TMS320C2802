@@ -25,7 +25,8 @@ void main(void)
 
 	ConfigCpuTimer(&CpuTimer0, 100, 1000000);//配置定时器中断时长:struct CPUTIMER_VARS CpuTimer0;
 
-	//InitAdc(); // Initial The Adc with the function InitAdc(),The GPIO Set to be the ADC_Channel is M_CL=ADC-A5
+	InitAdc(); // Initial The Adc with the function InitAdc(),The GPIO Set to be the ADC_Channel is M_CL=ADC-A5
+	delay(50);
 	// 电路原理图
 
 	StartCpuTimer0();//开始CPU中断
@@ -38,20 +39,23 @@ void main(void)
     ERTM;   // Enable Global realtime interrupt DBGM开放全局实时中断DBGM
     while(1)
     {
-    	GpioDataRegs.GPASET.bit.GPIO15 = 1;
-    	delay(800);
-    	GpioDataRegs.GPACLEAR.bit.GPIO15 = 1;
-    	delay(800);
-    	ADC_Voltage = ADCLO+(AdcMirror.ADCRESULT5)*3.0/4096; //The formulation to calculate the input ADC_Voltage
+    	AdcRegs.ADCTRL2.bit.RST_SEQ1 = 1; //Immediately reset sequencer to state CONV00
+    	AdcRegs.ADCTRL2.bit.SOC_SEQ1 = 1; //S/W - Software writing a 1 to this bit
+    	ADC_Voltage = ADCLO+(AdcMirror.ADCRESULT0)*3.0/4096; //The formulation to calculate the input ADC_Voltage,Use the mirror result we do not need to right shift the ADC_value
+    	AdcRegs.ADCTRL2.bit.RST_SEQ1 = 1; //Immediately reset sequencer to state CONV00
+    	AdcRegs.ADCTRL2.bit.SOC_SEQ1 = 0; //Clears a pending SOC trigger
+    	delay(100);
     	if(0 == count%10)
     	{
     		count = 0;
-    		ADC_Voltage = ADC_Voltage/3.0;
-    		if(ADC_Voltage <= 1.5){
-    			GpioDataRegs.GPACLEAR.bit.GPIO24 = 1; //Remember to init the GPIO Port as Output
+    		ADC_Voltage = ADC_Voltage/10.0;
+    		if(ADC_Voltage >= 1.5){
+    			GpioDataRegs.GPASET.bit.GPIO15 = 1;
+    			//GpioDataRegs.GPACLEAR.bit.GPIO24 = 1; //Remember to init the GPIO Port as Output
     		}
     		else{
-    			GpioDataRegs.GPASET.bit.GPIO24 = 1;
+    			GpioDataRegs.GPACLEAR.bit.GPIO15 = 1;
+    			//GpioDataRegs.GPASET.bit.GPIO24 = 1; //The LED on the port GPIO24 is Broken!
     		}
     		ADC_Voltage = 0;
     	}
