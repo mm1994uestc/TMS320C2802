@@ -20,13 +20,17 @@ void main(void)
    InitPieVectTable(); // Enable the PIE Vector Table
 //--------------------------------------------------
 	InitCpuTimers();//初始化CPU定时器
+
 	EALLOW;
+
 	PieVectTable.TINT0 = &TINT0_ISR;//定时器0中断矢量
+
 	EDIS;
 
 	ConfigCpuTimer(&CpuTimer0, 100, 1000000);//配置定时器中断时长:struct CPUTIMER_VARS CpuTimer0;
 
 	InitAdc(); // Initial The Adc with the function InitAdc(),The GPIO Set to be the ADC_Channel is M_CL=ADC-A5
+	InitEPwm(); //Initial The ePWM with the function InitEPwm()
 	delay(50);
 
 	StartCpuTimer0();//开始CPU中断

@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker PC v15.12.3                    
 ******************************************************************************
->> Linked Thu Mar 09 16:53:39 2017
+>> Linked Fri Mar 10 01:53:40 2017
 
 OUTPUT FILE NAME:   <TMS320C2802.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 003f2405
+ENTRY POINT SYMBOL: "_c_int00"  address: 003f24ff
 
 
 MEMORY CONFIGURATION
@@ -15,7 +15,7 @@ PAGE 0:
   RAML0                 00008000   00001000  00000004  00000ffc  RWIX
   OTP                   003d7800   00000400  00000000  00000400  RWIX
   FLASHD                003f0000   00002000  00000004  00001ffc  RWIX
-  FLASHC                003f2000   00002000  0000068d  00001973  RWIX
+  FLASHC                003f2000   00002000  0000078d  00001873  RWIX
   FLASHA                003f6000   00001f80  00000123  00001e5d  RWIX
   CSM_RSVD              003f7f80   00000076  00000000  00000076  RWIX
   BEGIN                 003f7ff6   00000002  00000002  00000000  RWIX
@@ -84,32 +84,33 @@ section   page    origin      length       input sections
 ramfuncs   0    003f0000    00000004     RUN ADDR = 00008000
                   003f0000    00000004     DSP280x_usDelay.obj (ramfuncs)
 
-.text      0    003f2000    0000068d     
+.text      0    003f2000    0000078d     
                   003f2000    00000140     DSP280x_DefaultIsr.obj (.text:retain)
-                  003f2140    000000c2     DSP280x_SysCtrl.obj (.text)
-                  003f2202    000000ae     main.obj (.text)
-                  003f22b0    00000083     rts2800_ml.lib : fs_div.obj (.text)
-                  003f2333    00000078                    : fs_add.obj (.text)
-                  003f23ab    0000005a                    : fs_mpy.obj (.text)
-                  003f2405    00000054                    : boot.obj (.text)
-                  003f2459    00000046     DSP280x_CpuTimers.obj (.text)
-                  003f249f    00000046     rts2800_ml.lib : cpy_tbl.obj (.text)
-                  003f24e5    0000003b     DSP280x_Adc.obj (.text)
-                  003f2520    00000034     DSP280x_Gpio.obj (.text)
-                  003f2554    00000029     rts2800_ml.lib : exit.obj (.text)
-                  003f257d    00000029                    : fs_tol.obj (.text)
-                  003f25a6    00000028     DSP280x_PieCtrl.obj (.text)
-                  003f25ce    00000022     rts2800_ml.lib : i_div.obj (.text)
-                  003f25f0    00000020     DSP280x_PieVect.obj (.text)
-                  003f2610    0000001a     rts2800_ml.lib : cpy_utils.obj (.text)
-                  003f262a    00000019                    : args_main.obj (.text)
-                  003f2643    00000017                    : fs_cmp.obj (.text)
-                  003f265a    00000010                    : u_tofs.obj (.text)
-                  003f266a    0000000f     main.obj (.text:retain)
-                  003f2679    00000009     rts2800_ml.lib : _lock.obj (.text)
-                  003f2682    00000008     DSP280x_CodeStartBranch.obj (.text)
-                  003f268a    00000002     rts2800_ml.lib : pre_init.obj (.text)
-                  003f268c    00000001                    : startup.obj (.text)
+                  003f2140    000000f8     DSP280x_EPwm.obj (.text)
+                  003f2238    000000c2     DSP280x_SysCtrl.obj (.text)
+                  003f22fa    000000b0     main.obj (.text)
+                  003f23aa    00000083     rts2800_ml.lib : fs_div.obj (.text)
+                  003f242d    00000078                    : fs_add.obj (.text)
+                  003f24a5    0000005a                    : fs_mpy.obj (.text)
+                  003f24ff    00000054                    : boot.obj (.text)
+                  003f2553    00000046     DSP280x_CpuTimers.obj (.text)
+                  003f2599    00000046     rts2800_ml.lib : cpy_tbl.obj (.text)
+                  003f25df    0000003b     DSP280x_Adc.obj (.text)
+                  003f261a    0000003a     DSP280x_Gpio.obj (.text)
+                  003f2654    00000029     rts2800_ml.lib : exit.obj (.text)
+                  003f267d    00000029                    : fs_tol.obj (.text)
+                  003f26a6    00000028     DSP280x_PieCtrl.obj (.text)
+                  003f26ce    00000022     rts2800_ml.lib : i_div.obj (.text)
+                  003f26f0    00000020     DSP280x_PieVect.obj (.text)
+                  003f2710    0000001a     rts2800_ml.lib : cpy_utils.obj (.text)
+                  003f272a    00000019                    : args_main.obj (.text)
+                  003f2743    00000017                    : fs_cmp.obj (.text)
+                  003f275a    00000010                    : u_tofs.obj (.text)
+                  003f276a    0000000f     main.obj (.text:retain)
+                  003f2779    00000009     rts2800_ml.lib : _lock.obj (.text)
+                  003f2782    00000008     DSP280x_CodeStartBranch.obj (.text)
+                  003f278a    00000002     rts2800_ml.lib : pre_init.obj (.text)
+                  003f278c    00000001                    : startup.obj (.text)
 
 .econst    0    003f6000    00000100     
                   003f6000    00000100     DSP280x_PieVect.obj (.econst:_PieVectTableInit)
@@ -330,16 +331,17 @@ MODULE SUMMARY
        DSP280x_GlobalVariableDefs.obj   0      0         2336   
        DSP280x_DefaultIsr.obj           320    0         0      
        DSP280x_PieVect.obj              32     0         256    
-       main.obj                         189    0         13     
+       DSP280x_EPwm.obj                 248    0         0      
+       main.obj                         191    0         13     
        DSP280x_SysCtrl.obj              194    0         0      
        DSP280x_CpuTimers.obj            70     0         8      
        DSP280x_Adc.obj                  59     0         0      
-       DSP280x_Gpio.obj                 52     0         0      
+       DSP280x_Gpio.obj                 58     0         0      
        DSP280x_PieCtrl.obj              40     0         0      
        DSP280x_CodeStartBranch.obj      10     0         0      
        DSP280x_usDelay.obj              8      0         0      
     +--+--------------------------------+------+---------+---------+
-       Total:                           974    0         2613   
+       Total:                           1230   0         2613   
                                                                 
     C:\ti\ccsv6\tools\compiler\c2000_15.12.3.LTS\lib\rts2800_ml.lib
        fs_div.obj                       131    0         0      
@@ -362,7 +364,7 @@ MODULE SUMMARY
                                                                 
        Stack:                           0      0         768    
     +--+--------------------------------+------+---------+---------+
-       Grand Total:                     1687   0         3415   
+       Grand Total:                     1943   0         3415   
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -469,21 +471,21 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                            
 ----  -------   ----                            
 0     003f2000  .text                           
-0     003f2554  C$$EXIT                         
-0     003f2338  FS$$ADD                         
-0     003f2643  FS$$CMP                         
-0     003f22b0  FS$$DIV                         
-0     003f23ab  FS$$MPY                         
-0     003f2333  FS$$SUB                         
-0     003f257d  FS$$TOL                         
-0     003f25ce  I$$DIV                          
-0     003f25df  I$$MOD                          
-0     003f265a  U$$TOFS                         
+0     003f2654  C$$EXIT                         
+0     003f2432  FS$$ADD                         
+0     003f2743  FS$$CMP                         
+0     003f23aa  FS$$DIV                         
+0     003f24a5  FS$$MPY                         
+0     003f242d  FS$$SUB                         
+0     003f267d  FS$$TOL                         
+0     003f26ce  I$$DIV                          
+0     003f26df  I$$MOD                          
+0     003f275a  U$$TOFS                         
 0     003f2073  _ADCINT_ISR                     
 1     00000490  _ADC_Voltage                    
 1     00000b00  _AdcMirror                      
 1     00007100  _AdcRegs                        
-0     003f246e  _ConfigCpuTimer                 
+0     003f2568  _ConfigCpuTimer                 
 1     00000480  _CpuTimer0                      
 1     00000c00  _CpuTimer0Regs                  
 1     00000c08  _CpuTimer1Regs                  
@@ -493,7 +495,7 @@ page  address   name
 0     003f200a  _DATALOG_ISR                    
 0     00008000  _DSP28x_usDelay                 
 1     00000880  _DevEmuRegs                     
-0     003f2153  _DisableDog                     
+0     003f224b  _DisableDog                     
 0     003f211d  _ECAN0INTA_ISR                  
 0     003f2127  _ECAN0INTB_ISR                  
 0     003f2122  _ECAN1INTA_ISR                  
@@ -540,7 +542,7 @@ page  address   name
 0     003f20d2  _EQEP2_INT_ISR                  
 1     00006b00  _EQep1Regs                      
 1     00006b40  _EQep2Regs                      
-0     003f25c5  _EnableInterrupts               
+0     003f26c5  _EnableInterrupts               
 1     00000a80  _FlashRegs                      
 1     00006f80  _GpioCtrlRegs                   
 1     00006fc0  _GpioDataRegs                   
@@ -551,14 +553,24 @@ page  address   name
 0     003f201e  _ILLEGAL_ISR                    
 0     003f2000  _INT13_ISR                      
 0     003f2005  _INT14_ISR                      
-0     003f24e5  _InitAdc                        
-0     003f2459  _InitCpuTimers                  
-0     003f2520  _InitGpio                       
-0     003f2188  _InitPeripheralClocks           
-0     003f25a6  _InitPieCtrl                    
-0     003f25f0  _InitPieVectTable               
-0     003f215b  _InitPll                        
-0     003f2140  _InitSysCtrl                    
+0     003f25df  _InitAdc                        
+0     003f2553  _InitCpuTimers                  
+0     003f2140  _InitEPwm                       
+0     003f217e  _InitEPwm1Gpio                  
+0     003f2190  _InitEPwm2Gpio                  
+0     003f21a2  _InitEPwm3Gpio                  
+0     003f21b6  _InitEPwm4Gpio                  
+0     003f21ca  _InitEPwm5Gpio                  
+0     003f21dc  _InitEPwm6Gpio                  
+0     003f2171  _InitEPwmGpio                   
+0     003f21ee  _InitEPwmSyncGpio               
+0     003f261a  _InitGpio                       
+0     003f2280  _InitPeripheralClocks           
+0     003f26a6  _InitPieCtrl                    
+0     003f26f0  _InitPieVectTable               
+0     003f2253  _InitPll                        
+0     003f2238  _InitSysCtrl                    
+0     003f2202  _InitTzGpio                     
 0     003f2019  _NMI_ISR                        
 0     003f2136  _PIE_RESERVED                   
 1     00000ce0  _PieCtrlRegs                    
@@ -584,13 +596,13 @@ page  address   name
 0     003f20fa  _SPITXINTD_ISR                  
 1     00007050  _SciaRegs                       
 1     00007750  _ScibRegs                       
-0     003f2149  _ServiceDog                     
+0     003f2241  _ServiceDog                     
 1     00007040  _SpiaRegs                       
 1     00007740  _SpibRegs                       
 1     00007760  _SpicRegs                       
 1     00007780  _SpidRegs                       
 1     00007010  _SysCtrlRegs                    
-0     003f266a  _TINT0_ISR                      
+0     003f276a  _TINT0_ISR                      
 0     003f2050  _USER10_ISR                     
 0     003f2055  _USER11_ISR                     
 0     003f205a  _USER12_ISR                     
@@ -618,33 +630,33 @@ abs   ffffffff  ___TI_prof_data_start
 abs   ffffffff  ___binit__                      
 abs   ffffffff  ___c_args__                     
 0     003f6100  ___cinit__                      
-0     003f268d  ___etext__                      
+0     003f278d  ___etext__                      
 abs   ffffffff  ___pinit__                      
 0     003f2000  ___text__                       
-0     003f262a  __args_main                     
+0     003f272a  __args_main                     
 1     00000492  __lock                          
-0     003f2681  __nop                           
-0     003f267d  __register_lock                 
-0     003f2679  __register_unlock               
+0     003f2781  __nop                           
+0     003f277d  __register_lock                 
+0     003f2779  __register_unlock               
 1     00000000  __stack                         
-0     003f268c  __system_post_cinit             
-0     003f268a  __system_pre_init               
+0     003f278c  __system_post_cinit             
+0     003f278a  __system_pre_init               
 1     00000494  __unlock                        
-0     003f2554  _abort                          
-0     003f2405  _c_int00                        
-0     003f249f  _copy_in                        
+0     003f2654  _abort                          
+0     003f24ff  _c_int00                        
+0     003f2599  _copy_in                        
 1     0000048e  _count                          
-0     003f2610  _ddcopy                         
-0     003f2298  _delay                          
-0     003f2610  _dpcopy                         
-0     003f2556  _exit                           
-0     003f2202  _main                           
-0     003f2610  _pdcopy                         
-0     003f2610  _ppcopy                         
+0     003f2710  _ddcopy                         
+0     003f2392  _delay                          
+0     003f2710  _dpcopy                         
+0     003f2656  _exit                           
+0     003f22fa  _main                           
+0     003f2710  _pdcopy                         
+0     003f2710  _ppcopy                         
 0     003f213b  _rsvd_ISR                       
 abs   ffffffff  binit                           
 0     003f6100  cinit                           
-0     003f268d  etext                           
+0     003f278d  etext                           
 abs   ffffffff  pinit                           
 
 
@@ -722,47 +734,57 @@ page  address   name
 0     003f2131  _EMPTY_ISR                      
 0     003f2136  _PIE_RESERVED                   
 0     003f213b  _rsvd_ISR                       
-0     003f2140  _InitSysCtrl                    
-0     003f2149  _ServiceDog                     
-0     003f2153  _DisableDog                     
-0     003f215b  _InitPll                        
-0     003f2188  _InitPeripheralClocks           
-0     003f2202  _main                           
-0     003f2298  _delay                          
-0     003f22b0  FS$$DIV                         
-0     003f2333  FS$$SUB                         
-0     003f2338  FS$$ADD                         
-0     003f23ab  FS$$MPY                         
-0     003f2405  _c_int00                        
-0     003f2459  _InitCpuTimers                  
-0     003f246e  _ConfigCpuTimer                 
-0     003f249f  _copy_in                        
-0     003f24e5  _InitAdc                        
-0     003f2520  _InitGpio                       
-0     003f2554  C$$EXIT                         
-0     003f2554  _abort                          
-0     003f2556  _exit                           
-0     003f257d  FS$$TOL                         
-0     003f25a6  _InitPieCtrl                    
-0     003f25c5  _EnableInterrupts               
-0     003f25ce  I$$DIV                          
-0     003f25df  I$$MOD                          
-0     003f25f0  _InitPieVectTable               
-0     003f2610  _ddcopy                         
-0     003f2610  _dpcopy                         
-0     003f2610  _pdcopy                         
-0     003f2610  _ppcopy                         
-0     003f262a  __args_main                     
-0     003f2643  FS$$CMP                         
-0     003f265a  U$$TOFS                         
-0     003f266a  _TINT0_ISR                      
-0     003f2679  __register_unlock               
-0     003f267d  __register_lock                 
-0     003f2681  __nop                           
-0     003f268a  __system_pre_init               
-0     003f268c  __system_post_cinit             
-0     003f268d  ___etext__                      
-0     003f268d  etext                           
+0     003f2140  _InitEPwm                       
+0     003f2171  _InitEPwmGpio                   
+0     003f217e  _InitEPwm1Gpio                  
+0     003f2190  _InitEPwm2Gpio                  
+0     003f21a2  _InitEPwm3Gpio                  
+0     003f21b6  _InitEPwm4Gpio                  
+0     003f21ca  _InitEPwm5Gpio                  
+0     003f21dc  _InitEPwm6Gpio                  
+0     003f21ee  _InitEPwmSyncGpio               
+0     003f2202  _InitTzGpio                     
+0     003f2238  _InitSysCtrl                    
+0     003f2241  _ServiceDog                     
+0     003f224b  _DisableDog                     
+0     003f2253  _InitPll                        
+0     003f2280  _InitPeripheralClocks           
+0     003f22fa  _main                           
+0     003f2392  _delay                          
+0     003f23aa  FS$$DIV                         
+0     003f242d  FS$$SUB                         
+0     003f2432  FS$$ADD                         
+0     003f24a5  FS$$MPY                         
+0     003f24ff  _c_int00                        
+0     003f2553  _InitCpuTimers                  
+0     003f2568  _ConfigCpuTimer                 
+0     003f2599  _copy_in                        
+0     003f25df  _InitAdc                        
+0     003f261a  _InitGpio                       
+0     003f2654  C$$EXIT                         
+0     003f2654  _abort                          
+0     003f2656  _exit                           
+0     003f267d  FS$$TOL                         
+0     003f26a6  _InitPieCtrl                    
+0     003f26c5  _EnableInterrupts               
+0     003f26ce  I$$DIV                          
+0     003f26df  I$$MOD                          
+0     003f26f0  _InitPieVectTable               
+0     003f2710  _ddcopy                         
+0     003f2710  _dpcopy                         
+0     003f2710  _pdcopy                         
+0     003f2710  _ppcopy                         
+0     003f272a  __args_main                     
+0     003f2743  FS$$CMP                         
+0     003f275a  U$$TOFS                         
+0     003f276a  _TINT0_ISR                      
+0     003f2779  __register_unlock               
+0     003f277d  __register_lock                 
+0     003f2781  __nop                           
+0     003f278a  __system_pre_init               
+0     003f278c  __system_post_cinit             
+0     003f278d  ___etext__                      
+0     003f278d  etext                           
 0     003f6000  _PieVectTableInit               
 0     003f6100  ___cinit__                      
 0     003f6100  cinit                           
@@ -831,4 +853,4 @@ abs   ffffffff  ___pinit__
 abs   ffffffff  binit                           
 abs   ffffffff  pinit                           
 
-[178 symbols]
+[188 symbols]

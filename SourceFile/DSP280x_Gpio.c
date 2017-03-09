@@ -41,6 +41,10 @@ void InitGpio(void)
    GpioDataRegs.GPACLEAR.bit.GPIO11 = 1;
 #endif
 
+   GpioCtrlRegs.GPAMUX1.bit.GPIO0 = 0; //Set the port to be ePWM Output port!---->EPWM1A (O)
+   GpioCtrlRegs.GPADIR.bit.GPIO0 = 1; //Set the direction of the port to be output
+   GpioCtrlRegs.GPAPUD.bit.GPIO0 = 1; //Set up the internal PullUp
+
    GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0; //Timer cycle control LED
    GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 0;
    GpioCtrlRegs.GPADIR.bit.GPIO12 = 1;

@@ -21,10 +21,43 @@
 //
 void InitEPwm(void)
 {
-   // Initialize ePWM1/2/3/4/5/6
+	/*
+	 * Here i am going to use the up-down model to control my ePWM module!
+	 * In down-count mode, the time-base counter starts from the period (TBPRD) value and decrements until
+     * it reaches zero. When it reaches zero, the time-base counter is reset to the period value and it begins
+     * to decrement once again. Tpwm = 2 x TBPRD x Ttbclk
+	 */
+	InitEPwmGpio(); //初始化了ePWM模块的GPIO端口
 
-   //tbd...
- 
+	EALLOW;
+
+	EPwm1Regs.TBCTL.bit.CLKDIV = TB_DIV1; //TBCLK Setting
+	EPwm1Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; //Setting to be up-down model
+	// EPwm1Regs.TBCTL.bit.FREE_SOFT = ?; // Emulation mode Select?
+	EPwm1Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1; //TBCLK Setting
+	EPwm1Regs.TBCTL.bit.PHSDIR = TB_DOWN; //Ques?
+	EPwm1Regs.TBCTL.bit.PHSEN = TB_DISABLE; //Disable the Input SYNCI Single!
+	EPwm1Regs.TBCTL.bit.PRDLD = TB_IMMEDIATE; //TBPRD的设置立即生效
+	EPwm1Regs.TBCTL.bit.SWFSYNC = TB_SYNC_DISABLE; //关闭同步输入信号
+	EPwm1Regs.TBCTL.bit.SYNCOSEL = 0; //选择是否同步输入EPWMxSYNCI信号和输出EPWMxSYNCO信号(Disable or SYNCI)查一下DataSheet
+
+	EPwm1Regs.TBPHS.half.TBPHS = 0; //Set the Phase offset register of TBPHS to be zeros!
+	//EPwm1Regs.TBCTR = 0; //将时间计数器的初始值清0 采用此方案将产生的是方波，不是PWM波
+	EPwm1Regs.CMPA.half.CMPA = 900; //Set the PWM parameter percent!
+	EPwm1Regs.TBPRD = 2048;//See the beginning of the InitEPwm Function! --> Type(TBPRD) is Uint16  2048=(800H)=(1000 0000 0000B)
+
+	EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+
+	EPwm1Regs.AQCTLA.bit.CAD = 1; //Action Counter = Compare A down
+	EPwm1Regs.AQCTLA.bit.CAU = 1; //Action Counter = Compare A up
+
+	EPwm1Regs.DBCTL.bit.IN_MODE = 0; //Ques?
+	EPwm1Regs.DBCTL.bit.OUT_MODE = 0; //Ques?
+
+	EPwm1Regs.PCCTL.bit.CHPEN = 1; //Enable the PWM_Chopper(PC) to output the PWM Single
+	EPwm1Regs.TZCTL.bit.TZA = 0; // Take to action at the port TZ1 as GPIO0/EPWM1A
+
+	EDIS;
 }
 
 //---------------------------------------------------------------------------
@@ -42,15 +75,15 @@ void InitEPwmGpio(void)
    InitEPwm1Gpio();
    InitEPwm2Gpio();
    InitEPwm3Gpio();
-#if DSP28_EPWM4
+#if DSP28_EPWM4 //宏定义中目前为0，所以不启用EPWM4模块
    InitEPwm4Gpio();
-#endif // endif DSP28_EPWM4
-#if DSP28_EPWM5    
+#endif
+#if DSP28_EPWM5 // 0
    InitEPwm5Gpio();
-#endif // endif DSP28_EPWM5
-#if DSP28_EPWM6
+#endif
+#if DSP28_EPWM6 // 0
    InitEPwm6Gpio();
-#endif // endif DSP28_EPWM6 
+#endif
 }
 
 void InitEPwm1Gpio(void)

@@ -176,7 +176,7 @@ typedef long double     float64;
 #define DSP28_EPWM1 1
 #define DSP28_EPWM2 1
 #define DSP28_EPWM3 1
-#define DSP28_EPWM4 0
+#define DSP28_EPWM4 0 //在EPwm.c文件中使用了这个宏定义的变量，DSP28_EPWM4=0表示不启用GPIOA.4的ePWM功能
 #define DSP28_EPWM5 0
 #define DSP28_EPWM6 0
 #define DSP28_ECAP1 1
