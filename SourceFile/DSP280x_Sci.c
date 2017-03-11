@@ -22,7 +22,7 @@
 void InitSci(void)
 {
 	// Initialize SCI-A:
-
+	InitSciGpio(); //配置SCIA的GPIO的功能模式，其他寄存器的控制在明天中午务必完成，并进行测试
 	//tbd...
  	
 

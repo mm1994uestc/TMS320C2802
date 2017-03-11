@@ -31,6 +31,7 @@ void main(void)
 
 	InitAdc(); // Initial The Adc with the function InitAdc(),The GPIO Set to be the ADC_Channel is M_CL=ADC-A5
 	InitEPwm(); //Initial The ePWM with the function InitEPwm()
+	InitSci();
 	delay(50);
 
 	StartCpuTimer0();//¿ªÊ¼CPUÖÐ¶Ï
